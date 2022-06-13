@@ -1,0 +1,41 @@
+---
+- name: deploy tomcat 
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Test url
+      uri:
+        url: http://192.168.75.128/hello/hi
+        status_code: 200
+        return_content: yes
+      register: url_status
+    
+    - name: Stop tomcat server
+      service:
+        name: tomcat 
+        state: stopped
+
+    - name: delete existing war file
+      file:
+        path: /opt/tomcat/tomcat/webapps/hello.war
+        state: absent
+      when: url_status.failed == flase
+
+    - name: download new deployment file
+      git:
+        url: https://github.com/tomhac3k/tomcat
+        dest: /opt/tomcat/tomcat/webapps/hello.war
+
+    - name: set file permissions
+      file: 
+        path: /opt/tomcat/tomcat/webapps/hello.war
+        mode: 0644
+        user: tomcat 
+        group: tomcat
+      notify: start tomcat 
+
+  handlers:
+    - name: start tomcat 
+      service:
+        name: tomcat
+        state: started
