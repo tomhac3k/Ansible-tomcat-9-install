@@ -1,5 +1,5 @@
 ---
-- name: War File Deploy tomcat 
+- name: War File Deploy tomcat tomcat 
   hosts: localhost
   become: yes
   tasks:
@@ -19,7 +19,6 @@
       file:
         path: /opt/tomcat/tomcat/webapps/hello.war
         state: absent
-      when: url_status.failed == flase
 
     - name: download new deployment file
       git:
