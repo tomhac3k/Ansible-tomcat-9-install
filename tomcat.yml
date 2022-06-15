@@ -5,10 +5,9 @@
   tasks:
     - name: Test url
       uri:
-        url: http://192.168.75.128/hello/hi
+        url: http://ansible.example.com/hello/hi
         status_code: 200
         return_content: yes
-      register: url_status
     
     - name: Stop tomcat server
       service:
@@ -32,6 +31,12 @@
         user: tomcat 
         group: tomcat
       notify: start tomcat 
+
+    - name: check URL status
+      uri:  
+        url: ansible.example.com:8080/hello/hi
+        return_content: yes
+        status_code: 200
 
   handlers:
     - name: start tomcat 
