@@ -1,5 +1,5 @@
 ---
-- name: deploy tomcat 
+- name: War File Deploy tomcat 
   hosts: localhost
   become: yes
   tasks:
@@ -39,6 +39,3 @@
       service:
         name: tomcat
         state: started
-    
-
-for test:
