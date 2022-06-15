@@ -1,0 +1,26 @@
+---
+- name: Install tomcat
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install and configure JAVA
+      yum:
+        name: 
+          - java-1.8.0-openjdk-devel
+        state: installed
+
+    - name: Check java Installation and version
+      command: "java -version"
+      register: version
+
+    - name: Display version
+      debug:
+        var: version.stdout
+
+    - name: download tomcat packages
+      get_url:
+        url: https://mirrors.estointernet.in/apache/tomcat/tomcat-9/v9.0.37/bin/apache-tomcat-9.0.37.tar.gz
+        dest: /opt/tomcat 
+
+    - name: start tomcat
+      script: /opt/tomcat/bin/startup.sh
