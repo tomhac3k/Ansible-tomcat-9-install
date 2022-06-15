@@ -39,3 +39,6 @@
       service:
         name: tomcat
         state: started
+    - name: debug
+      debug:
+        msg: "Hey test"
