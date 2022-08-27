@@ -55,13 +55,12 @@
     - name: reload systemd
       systemd:
         daemon_reload: true
-
     - name: start tomcat
       service:
         name: tomcat
         state: started
         enabled: true
-        
+
     - name: Add 8080 to firewall rule
       firewalld:
         port: 8080/tcp
