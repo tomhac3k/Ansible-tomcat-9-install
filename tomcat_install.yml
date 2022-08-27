@@ -48,8 +48,8 @@
       firewalld:
         port: 8080/tcp
         state: enabled
-        permanent: yes
-        immediate: yes
+        permanent: true
+        immediate: true
     - name: start tomcat service
       service:
         name: tomcat
