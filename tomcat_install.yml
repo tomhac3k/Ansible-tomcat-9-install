@@ -1,6 +1,6 @@
 ---
 - hosts: test
-  become: yes
+  become: true
   tasks:
     - name: Install open JDK 
       yum:
@@ -18,7 +18,7 @@
       user:
         name: tomcat
         state: present
-        system: yes
+        system: true
         shell: /bin/false
         home: /opt/tomcat 
     - name: Download tomcat packages
@@ -30,13 +30,13 @@
       unarchive:
         src: /root/tomcat.tar.gz
         dest: /root/
-        remote_src: yes    
+        remote_src: true    
     - name: Copy files to opt 
       copy:
         src: /root/apache-tomcat-9.0.65/
         dest: /opt/tomcat/
-        directory_mode: yes
-        remote_src: yes
+        directory_mode: true
+        remote_src: true
         owner: tomcat
         group: tomcat
     - name: Link files for easy update
@@ -55,18 +55,18 @@
         mode: +x
     - name: reload systemd
       systemd:
-        daemon_reload: yes
+        daemon_reload: true
     - name: start tomcat
       service:
         name: tomcat
         state: started
-        enabled: yes
+        enabled: true
     - name: Add 8080 to firewall rule
       firewalld:
         port: 8080/tcp
         state: enabled
-        immediate: yes
-        permanent: yes
+        immediate: true
+        permanent: true
     #- name: reboot
     #  reboot:
 - hosts: localhost
