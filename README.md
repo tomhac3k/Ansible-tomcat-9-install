@@ -1,4 +1,4 @@
-# Install Tomcat 9 on OEL 8, RHEL CENTOS Stream
+# Install Tomcat 9 on Enterprise Linux
 
 Ansible Playbook to automate Tomcat 9 installation on Oracle Enterprise Linux 8, Red Hat Enterprise Linux 8 and CentOS Stream.
 
