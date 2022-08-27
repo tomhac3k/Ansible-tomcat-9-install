@@ -1,5 +1,5 @@
 ---
-- name: War File Deploy tomcat tomcat 
+- name: War File Deploy tomcat tomcat
   hosts: test
   become: yes
   tasks:
@@ -7,10 +7,10 @@
       uri:
         url: http://servere.example.com:8080
         status_code: 200
-        return_content: yes 
+        return_content: yes
     - name: Stop tomcat server
       service:
-        name: 
+        name:
         state: stopped
     - name: delete existing war file
       file:
@@ -24,17 +24,16 @@
       file: 
         path: /opt/tomcat/tomcat/webapps/hello.war
         mode: 0644
-        user: tomcat 
+        user: tomcat
         group: tomcat
-      notify: start tomcat 
+      notify: start tomcat
     - name: check URL status
       uri:
         url: ansible.example.com:8080/hello/hi
         return_content: yes
         status_code: 200
   handlers:
-    - name: start tomcat 
+    - name: start tomcat
       service:
         name: tomcat
         state: started
-        
