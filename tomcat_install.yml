@@ -2,7 +2,7 @@
 - hosts: test
   become: true
   tasks:
-    - name: Install open JDK 
+    - name: Install open JDK
       yum:
         name:
           - java-1.8.0-openjdk-devel
@@ -20,18 +20,17 @@
         state: present
         system: true
         shell: /bin/false
-        home: /opt/tomcat 
+        home: /opt/tomcat
     - name: Download tomcat packages
       get_url:
         url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
         dest: /root/tomcat.tar.gz
-
     - name: Unarchive apache tomcat
       unarchive:
         src: /root/tomcat.tar.gz
         dest: /root/
-        remote_src: true    
-    - name: Copy files to opt 
+        remote_src: true
+    - name: Copy files to opt
       copy:
         src: /root/apache-tomcat-9.0.65/
         dest: /opt/tomcat/
@@ -70,14 +69,15 @@
     #- name: reboot
     #  reboot:
 - hosts: localhost
-  become: no 
+  become: no
   tasks:
-    - name: Verify tomcat server page 
+    - name: Verify tomcat server page
       uri:
         url: http://servere.example.com:8080
         status_code: 200
       register: url_status
     - name: display URL status
-      debug: 
+      debug:
         msg: "URL loading fine"
       when: url_status.status == 200
+      
