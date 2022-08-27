@@ -55,4 +55,3 @@
         name: tomcat
         state: started
         enabled: true
-
