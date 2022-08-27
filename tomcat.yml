@@ -7,7 +7,7 @@
       uri:
         url: http://servere.example.com:8080
         status_code: 200
-        return_content: yes
+        return_content: true
     - name: Stop tomcat server
       service:
         name:
