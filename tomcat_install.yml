@@ -1,12 +1,13 @@
 ---
-- hosts: test
+- hosts: dev
   become: true
   tasks:
-    - name: Install open JDK
+    - name: Install neccessary packages
       yum:
         name:
           - java-1.8.0-openjdk-devel
           - tar
+          - wget
         state: installed
     - name: Check java Installation and version
       command: "java -version"
@@ -14,70 +15,43 @@
     - name: Display version
       debug:
         var: version.stderr_lines
-    - name: Create tomcat user
-      user:
-        name: tomcat
-        state: present
-        system: true
-        shell: /bin/false
-        home: /opt/tomcat
     - name: Download tomcat packages
       get_url:
         url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
-        dest: /root/tomcat.tar.gz
-    - name: Unarchive apache tomcat
+        dest: /usr/local/
+    - name: extract tar archive
       unarchive:
-        src: /root/tomcat.tar.gz
-        dest: /root/
+        src: /usr/local/apache-tomcat-9.0.65.tar.gz
+        dest: /usr/local/
         remote_src: true
-    - name: Copy files to opt
-      copy:
-        src: /root/apache-tomcat-9.0.65/
-        dest: /opt/tomcat/
-        directory_mode: true
-        remote_src: true
+    - name: rename to tomcat 9
+      command: "mv /usr/local/apache-tomcat-9.0.65 /usr/local/tomcat9"
+      ignore_errors: true
+    - name: create tomcat user
+      user:
+        name: tomcat
+        state: present
+    - name: Change permissions
+      file:
+        path: /usr/local/tomcat9
         owner: tomcat
         group: tomcat
-    - name: Link files for easy update
-      file:
-        src: /opt/tomcat
-        dest: /opt/tomcat/updated
-        state: link
-    - name: Change owner ship
-      raw: "sudo chown -R tomcat: /opt/tomcat/*"
-    - name: Add exec permissions
-      raw: "sudo sh -c 'chmod +x /opt/tomcat/updated/bin/*.sh'"
-    - name: Create tomcat service file in systemd
+        recurse: true
+    - name: Create tomcat service file
       template:
-        src: files/tomcat.service
+        src: files/tomcat.service.j2
         dest: /etc/systemd/system/tomcat.service
-        mode: +x
     - name: reload systemd
       systemd:
-        daemon_reload: true
-    - name: start tomcat
+        daemon-reload: true
+    - name: Add firewall 8080 rule
+      firewalld:
+        port: 8080/tcp
+        state: enabled
+        permanent: true
+        immediate: true
+    - name: start tomcat service
       service:
         name: tomcat
         state: started
         enabled: true
-
-    - name: Add 8080 to firewall rule
-      firewalld:
-        port: 8080/tcp
-        state: enabled
-        immediate: true
-        permanent: true
-    # - name: reboot
-    #  reboot:
-- hosts: localhost
-  become: false
-  tasks:
-    - name: Verify tomcat server page
-      uri:
-        url: http://servere.example.com:8080
-        status_code: 200
-      register: url_status
-    - name: display URL status
-      debug:
-        msg: "URL loading fine"
-      when: url_status.status == 200
