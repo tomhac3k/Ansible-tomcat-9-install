@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: servera.example.com
   become: true
   tasks:
     - name: Install neccessary packages
@@ -8,6 +8,7 @@
           - java-1.8.0-openjdk-devel
           - tar
           - wget
+          - git
         state: installed
     - name: Check java Installation and version
       command: "java -version"
