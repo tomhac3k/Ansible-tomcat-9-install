@@ -1,7 +1,7 @@
 ---
 - name: War File Deploy tomcat tomcat
   hosts: test
-  become: yes
+  become: true
   tasks:
     - name: Test url
       uri:
@@ -21,7 +21,7 @@
         url: https://github.com/tomhac3k/tomcat
         dest: /opt/tomcat/tomcat/webapps/hello.war
     - name: set file permissions
-      file: 
+      file:
         path: /opt/tomcat/tomcat/webapps/hello.war
         mode: 0644
         user: tomcat
@@ -30,7 +30,7 @@
     - name: check URL status
       uri:
         url: ansible.example.com:8080/hello/hi
-        return_content: yes
+        return_content: true
         status_code: 200
   handlers:
     - name: start tomcat
