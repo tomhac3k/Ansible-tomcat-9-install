@@ -36,3 +36,4 @@ This Playbook also works on all sub versions of OEL 8, RHEL 8 and CentOS Stream.
    This will be your tomcat installation location, don't change this if you're not sure.
    
     tomcat_location: /opt/
+   ## run: ansible-playbook tomcat_install.yml
