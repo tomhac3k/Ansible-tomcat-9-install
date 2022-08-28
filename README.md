@@ -3,6 +3,9 @@
 Ansible Playbook to automate Tomcat 9 installation on Oracle Enterprise Linux 8, Red Hat Enterprise Linux 8 and CentOS Stream.
 
 ## Tomcat version: 9 (9.0.65) and Java openjdk version: 1.8.0_342
+
+  9.0.65 Most stable tomcat 9 version
+  
 ## Ansible version: [core 2.12.2]
 
 Tomcat package used link: https://tomcat.apache.org/download-90.cgi
