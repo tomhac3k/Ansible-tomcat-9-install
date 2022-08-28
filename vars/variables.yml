@@ -1,0 +1,16 @@
+---
+# 
+# **Here you need mention location to your inventory file
+# Example:- inventory_file: /home/ansible/tomcat/inventoryfile 
+# Mention the log file to get the ansible logs
+log_file: ansible.log
+# **Here you need to mention your inventory hostnames or inventory groupnames
+# Example for a inventory host:- host: webservera.example.com
+# Example for inventory groups:- host: sandbox
+host: servera.example.com
+# These pacakges are basic that are required by the tasks to perform actions
+packages:
+  - tar # extract archive files
+  - wget # to download war files from remote loations
+# **This will be your tomcat installation location
+tomcat_location: /opt/
