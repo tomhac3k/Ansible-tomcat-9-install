@@ -2,7 +2,7 @@
 
 Ansible Playbook to automate Tomcat 9 installation on Oracle Enterprise Linux 8, Red Hat Enterprise Linux 8 and CentOS Stream.
 
-## Tomcat version: 9 (9.0.65) and Java openjdk version: "1.8.0_342"
+## Tomcat version: 9 (9.0.65) and Java openjdk version: 1.8.0_342
 ## Ansible version: [core 2.12.2]
 
 Tomcat package used link: https://tomcat.apache.org/download-90.cgi
@@ -18,7 +18,9 @@ This Playbook also works on all sub versions of OEL 8, RHEL 8 and CentOS Stream.
   
   Example for a inventory hosts:- host: webservera.example.com
   
-  Example for inventory groups:- host: sandbox # you can also mention multiple groups and hosts
+  Example for inventory groups:- host: sandbox
+  
+  you can also mention multiple groups and hosts
    
     host: servera.example.com
     
