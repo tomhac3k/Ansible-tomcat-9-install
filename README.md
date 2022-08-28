@@ -22,9 +22,9 @@ This Playbook also works on all sub versions of OEL 8, RHEL 8 and CentOS Stream.
     
   These pacakges are basic that are required by the tasks to perform actions
    
-   packages:
-     - tar # to extract archive files
-     - wget # to download war files from remote loations
+    packages:
+      - tar # to extract archive files
+      - wget # to download war files from remote loations
       
    This will be your tomcat installation location don't change this if you're not sure.
    
