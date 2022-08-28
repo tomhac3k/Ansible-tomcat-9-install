@@ -19,8 +19,8 @@ This Playbook also works on all sub versions of OEL 9, RHEL 9 and CentOS Stream 
 ## How to use this playbook
 
 1. Download the repository
-2. move only the tomcat_install.yml playbook and vars/variables.yml to your ansible environment.
-3. edit the vars/variables.yml file according to your environment.
+2. Move only the tomcat_install.yml playbook and vars/variables.yml to your ansible environment.
+3. Edit the vars/variables.yml file according to your environment.
 
   Here you need to mention your inventory hostnames or inventory groupnames
   
@@ -28,7 +28,7 @@ This Playbook also works on all sub versions of OEL 9, RHEL 9 and CentOS Stream 
     
   Example for inventory groups:- host: sandbox
     
-  you can also mention multiple groups and hosts
+  You can also mention multiple groups and hosts
     
       host: servera.example.com
       
