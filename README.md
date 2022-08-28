@@ -30,6 +30,6 @@ This Playbook also works on all sub versions of OEL 8, RHEL 8 and CentOS Stream.
       - tar # to extract archive files
       - wget # to download war files from remote loations
       
-   This will be your tomcat installation location don't change this if you're not sure.
+   This will be your tomcat installation location, don't change this if you're not sure.
    
     tomcat_location: /opt/
