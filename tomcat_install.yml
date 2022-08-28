@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: servera.example.com
   become: true
   tasks:
     - name: Install neccessary packages
@@ -8,11 +8,12 @@
           - java-1.8.0-openjdk-devel
           - tar
           - wget
+          - git
         state: installed
     - name: Check java Installation and version
       command: "java -version"
       register: version
-    - name: Display version
+    - name: Displaying Java Installtion and version
       debug:
         var: version.stderr_lines
     - name: Download tomcat packages
@@ -55,3 +56,18 @@
         name: tomcat
         state: started
         enabled: true
+    - name: to test url after Installation
+      block:
+        - name: waiting 20 sec to continue
+          wait_for:
+            timeout: 20
+        - name: Load URL
+          uri:
+            url: http://servera.example.com:8080
+            status_code: 200
+          register: url_status
+        - name: Display Installation complete
+          debug:
+            msg: "Tomcat 9 Installation Complete on {{ ansible_facts['fqdn'] }}"
+          when: url_status.status == 200
+      delegate_to: localhost
