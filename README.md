@@ -12,6 +12,7 @@ Ansible Playbook to automate Tomcat 9 installation on Oracle Enterprise Linux 9,
 Tomcat package used link: https://tomcat.apache.org/download-90.cgi
 
 This Playbook also works on all sub versions of OEL 8, RHEL 8 and CentOS Stream 8.
+
 This Playbook also works on all sub versions of OEL 9, RHEL 9 and CentOS Stream 9.
 
 ## How to use this playbook
@@ -23,14 +24,21 @@ This Playbook also works on all sub versions of OEL 9, RHEL 9 and CentOS Stream 
   Here you need to mention your inventory hostnames or inventory groupnames
   
     Example for a inventory hosts:- host: webservera.example.com
+    
     Example for inventory groups:- host: sandbox
+    
     you can also mention multiple groups and hosts
+    
       host: servera.example.com
+      
     These pacakges are basic that are required by the tasks to perform actions
+    
     packages:
       - tar # to extract archive files
       - wget # to download war files from remote loations
+      
     This will be your tomcat installation location, don't change this if you're not sure.
+    
       tomcat_location: /opt/
     
 ### To this run playbook
