@@ -15,7 +15,9 @@ This Playbook also works on all sub versions of OEL 8, RHEL 8 and CentOS Stream.
 3. edit the vars/variables.yml file according to your environment.
 
   Here you need to mention your inventory hostnames or inventory groupnames
+  
   Example for a inventory hosts:- host: webservera.example.com
+  
   Example for inventory groups:- host: sandbox # you can also mention multiple groups and hosts
    
     host: servera.example.com
