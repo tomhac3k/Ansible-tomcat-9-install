@@ -14,13 +14,18 @@ This Playbook also works on all sub versions of OEL 8, RHEL 8 and CentOS Stream.
 2. move only the tomcat_install.yml playbook and vars/variables.yml to your ansible environment.
 3. edit the vars/variables.yml file according to your environment.
 
-  # **Here you need to mention your inventory hostnames or inventory groupnames
-  # Example for a inventory hosts:- host: webservera.example.com
-  # Example for inventory groups:- host: sandbox # you can also mention multiple groups and hosts
+  *Here you need to mention your inventory hostnames or inventory groupnames
+   *Example for a inventory hosts:- host: webservera.example.com
+   *Example for inventory groups:- host: sandbox # you can also mention multiple groups and hosts
+   
     host: servera.example.com
-  # These pacakges are basic that are required by the tasks to perform actions
+    
+   *These pacakges are basic that are required by the tasks to perform actions
+   
     packages:
       - tar # to extract archive files
       - wget # to download war files from remote loations
-  # **This will be your tomcat installation location don't change this if you're not sure.
-    tomcat_location: /opt/
+      
+   *This will be your tomcat installation location don't change this if you're not sure.
+   
+      tomcat_location: /opt/
