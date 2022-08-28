@@ -1,12 +1,23 @@
 ---
+<<<<<<< HEAD
+# **Here you need to mention your inventory hostnames or inventory groupnames
+# Example for a inventory host:- host: webservera.example.com
+# Example for inventory groups:- host: sandbox
+host: oel9.example.com
+=======
 # Feel free to change these variables according to your work environment.
 # **Here you need to mention your inventory hostnames or inventory groupnames
 # Example for a inventory host:- host: webservera.example.com
 # Example for inventory groups:- host: sandbox
 host: servera.example.com
+>>>>>>> 00f98e28e52180ffffc80ea15620a7bf3ab62a4e
 # These pacakges are basic that are required by the tasks to perform actions
 packages:
   - tar # to extract archive files
   - wget # to download war files from remote loations
+<<<<<<< HEAD
+# **This will be your tomcat installation location.
+=======
 # **This will be your tomcat installation location don't change this path if you're not sure.
+>>>>>>> 00f98e28e52180ffffc80ea15620a7bf3ab62a4e
 tomcat_location: /opt/
