@@ -1,0 +1,73 @@
+---
+- hosts: servera.example.com
+  become: true
+  tasks:
+    - name: Install neccessary packages
+      yum:
+        name:
+          - java-1.8.0-openjdk-devel
+          - tar
+          - wget
+          - git
+        state: installed
+    - name: Check java Installation and version
+      command: "java -version"
+      register: version
+    - name: Displaying Java Installtion and version
+      debug:
+        var: version.stderr_lines
+    - name: Download tomcat packages
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
+        dest: /usr/local/
+    - name: extract tar archive
+      unarchive:
+        src: /usr/local/apache-tomcat-9.0.65.tar.gz
+        dest: /usr/local/
+        remote_src: true
+    - name: rename to tomcat 9
+      command: "mv /usr/local/apache-tomcat-9.0.65 /usr/local/tomcat9"
+      ignore_errors: true
+    - name: create tomcat user
+      user:
+        name: tomcat
+        state: present
+    - name: Change permissions
+      file:
+        path: /usr/local/tomcat9
+        owner: tomcat
+        group: tomcat
+        recurse: true
+    - name: Create tomcat service file
+      template:
+        src: files/tomcat.service.j2
+        dest: /etc/systemd/system/tomcat.service
+    - name: reload systemd
+      systemd:
+        daemon-reload: true
+    - name: Add firewall 8080 rule
+      firewalld:
+        port: 8080/tcp
+        state: enabled
+        permanent: true
+        immediate: true
+    - name: start tomcat service
+      service:
+        name: tomcat
+        state: started
+        enabled: true
+    - name: to test url after Installation
+      block:
+        - name: waiting 20 sec to continue
+          wait_for:
+            timeout: 20
+        - name: Load URL
+          uri:
+            url: http://servera.example.com:8080
+            status_code: 200
+          register: url_status
+        - name: Display Installation complete
+          debug:
+            msg: "Tomcat 9 Installation Complete on {{ ansible_facts['fqdn'] }}"
+          when: url_status.status == 200
+      delegate_to: localhost
