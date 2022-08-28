@@ -65,7 +65,7 @@
             timeout: 20
         - name: Load URL
           uri:
-            url: http://servera.example.com:8080
+            url: "http://{{ host }}:8080"
             status_code: 200
           register: url_status
         - name: Display Installation complete
