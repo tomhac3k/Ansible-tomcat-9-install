@@ -1,0 +1,95 @@
+---
+# tasks file for tomcat9install
+- name: Block to verify Enterprise linux versions
+  block:
+    - name: Verify OS Type and version
+      debug:
+        msg:
+          - "Host OS Family is = {{ ansible_facts['os_family'] }}"
+          - "Host Distribution Version is = {{ ansible_facts['distribution_version'] }}"
+
+    - name: Install java openjdk
+      yum:
+        name: java-1.8.0-openjdk-devel
+        state: installed
+
+    - name: Install Neccessary Packages
+      yum:
+        name:
+          - tar
+          - git
+        state: installed
+
+    - name: Check Java Installation and Version
+      command: "java -version"
+      register: version
+
+    - name: Displaying Java Installation and Version
+      debug:
+        var: version.stderr_lines
+
+    - name: Download tomcat packages
+      get_url:
+        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
+        dest: "{{ tomcat_location }}apache-tomcat-9.0.65.tar.gz"
+
+    - name: Extract tar Archive
+      unarchive:
+        src: "{{ tomcat_location }}apache-tomcat-9.0.65.tar.gz"
+        dest: "{{ tomcat_location }}"
+        remote_src: true
+
+    - name: Rename Folder apache-tomcat-9.0.65 to tomcat9
+      command: "mv {{ tomcat_location }}apache-tomcat-9.0.65 {{ tomcat_location }}tomcat9"
+      ignore_errors: true
+
+    - name: Create tomcat User
+      user:
+        name: tomcat
+        state: present
+
+    - name: Set tomcat Ownership and file Permissions 
+      file:
+        path: "{{ tomcat_location }}tomcat9"
+        owner: tomcat
+        group: tomcat
+        recurse: true
+
+    - name: Create tomcat service file
+      template:
+        src: tomcat.service.j2
+        dest: /etc/systemd/system/tomcat.service
+
+    - name: Reload systemd
+      systemd:
+        daemon-reload: true
+
+    - name: Add firewall 8080 rule
+      firewalld:
+        port: 8080/tcp
+        state: enabled
+        permanent: true
+        immediate: true
+
+    - name: Start tomcat service
+      service:
+        name: tomcat
+        state: started
+        enabled: true
+
+    - name: Waiting for 20 sec so that tomcat loads it's configuration for the first time.
+      wait_for:
+        timeout: 20
+
+    - name: Load Tomcat URL
+      uri:
+        url: "http://{{ ansible_facts['fqdn'] }}:8080"
+        status_code: 200
+      register: url_status
+
+    - name: Display Installation complete Message
+      debug:
+        msg: "Tomcat 9 Installation Complete on {{ ansible_facts['fqdn'] }}"
+      when: url_status.status == 200
+  when: 
+    - ansible_facts['os_family'] == "RedHat"
