@@ -18,7 +18,7 @@ Role Variables
 
 Here you need to specify the tomcat installation location.
 
-  tomcat_location: /opt
+    tomcat_location: /opt
 
 Dependencies
 ------------
