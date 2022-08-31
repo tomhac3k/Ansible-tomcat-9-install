@@ -1,7 +1,0 @@
----
-- hosts: oel9.example.com
-  become: true
-  roles:
-    - tomcat9install
-  vars: 
-    tomcat_location: /usr/local/
