@@ -36,6 +36,13 @@ Including an example of how to use your role (for instance, with variables passe
          -  role: tomcat9install
             vars:
               tomcat_location: /opt
+              
+Expected Result
+---------------
+
+    TASK [tomcat9install : Display Installation complete Message]                           ****************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "Tomcat 9 Installation Complete on oel9.example.com"
 
 License
 -------
