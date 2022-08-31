@@ -10,9 +10,13 @@ Ansible version: 2.8
 
 Tomcat package used link: https://tomcat.apache.org/download-90.cgi
 
-This Playbook also works on all sub versions of OEL 8, RHEL 8 and CentOS Stream 8.
+This Role also works on all sub versions of
 
-This Playbook also works on all sub versions of OEL 9, RHEL 9 and CentOS Stream 9.
+    OEL 8 and 9
+    RHEL 8 and 9
+    CentOS Stream 8 and 9
+
+This Role also works on all sub versions of OEL 9, RHEL 9 and CentOS Stream 9.
 
 Role Variables
 --------------
