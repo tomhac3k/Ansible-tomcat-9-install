@@ -1,0 +1,5 @@
+---
+# defaults file for tomcat9install
+# **This will be your tomcat installation location don't change this path if you're not sure.
+
+tomcat_location: /opt/
