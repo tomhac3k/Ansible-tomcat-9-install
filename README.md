@@ -35,14 +35,14 @@ How to use this Role in your Playbook
       roles:
          -  role: tomcat10install
             vars:
-              tomcat_location: /opt
+              tomcat_location: /opt/
 
 Expected Result
 ---------------
 
     TASK [tomcat10install : Display Installation complete Message] 
     ok: [oel9.example.com] => {
-    "msg": "Tomcat 10 Installation Complete on oel9.example.com"
+    "msg": "Tomcat v10 Installation Complete on oel9.example.com"
 
 License
 -------
