@@ -1,5 +1,5 @@
 ---
-# tasks file for tomcat9install
+# tasks file for tomcat10install
 - name: Block to verify Enterprise linux versions
   block:
     - name: Verify OS Type and version
@@ -44,8 +44,8 @@
         dest: "{{ tomcat_location }}"
         remote_src: true
 
-    - name: Rename Folder apache-tomcat-9.0.65 to tomcat9
-      command: "mv {{ tomcat_location }}apache-tomcat-10.0.27 {{ tomcat_location }}tomcat9"
+    - name: Rename Folder apache-tomcat-9.0.65 to tomcat10
+      command: "mv {{ tomcat_location }}apache-tomcat-10.0.27 {{ tomcat_location }}tomcat10"
       ignore_errors: true
 
     - name: Create tomcat User
@@ -55,7 +55,7 @@
 
     - name: Set tomcat Ownership and file Permissions 
       file:
-        path: "{{ tomcat_location }}tomcat9"
+        path: "{{ tomcat_location }}tomcat10"
         owner: tomcat
         group: tomcat
         recurse: true
@@ -94,7 +94,7 @@
 
     - name: Display Installation complete Message
       debug:
-        msg: "Tomcat 9 Installation Complete on {{ ansible_facts['fqdn'] }}"
+        msg: "Tomcat v10 Installation Complete on {{ ansible_facts['fqdn'] }}"
       when: url_status.status == 200
   when: 
     - ansible_facts['os_family'] == "RedHat"
