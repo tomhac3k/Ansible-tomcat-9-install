@@ -1,7 +1,7 @@
 tomcat10install
 =========
 
-Fresh Tomcat 10 (10.0.27) Most stable tomcat 9 version Install on Enterprise Linux 8 and Enterprise Linux 9
+Fresh Tomcat 10 (10.0.27) Most stable tomcat 10 version Install on Enterprise Linux 8 and Enterprise Linux 9
 
 Requirements
 ------------
