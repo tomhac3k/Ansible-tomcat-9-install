@@ -33,18 +33,13 @@
         src: apache-tomcat-10.0.27.tar.gz
         dest: "{{ tomcat_location }}apache-tomcat-10.0.27.tar.gz"
 
-#    - name: Download tomcat packages
-#      get_url:
-#        url: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.65/bin/apache-tomcat-9.0.65.tar.gz
-#        dest: "{{ tomcat_location }}apache-tomcat-9.0.65.tar.gz"
-
     - name: Extract tar Archive
       unarchive:
         src: "{{ tomcat_location }}apache-tomcat-10.0.27.tar.gz"
         dest: "{{ tomcat_location }}"
         remote_src: true
 
-    - name: Rename Folder apache-tomcat-9.0.65 to tomcat10
+    - name: Rename Folder apache-tomcat-10.0.27 to tomcat10
       command: "mv {{ tomcat_location }}apache-tomcat-10.0.27 {{ tomcat_location }}tomcat10"
       ignore_errors: true
 
@@ -82,9 +77,10 @@
         state: started
         enabled: true
 
-    - name: Waiting for 20 sec so that tomcat loads it's configuration for the first time.
+    - name: Wait for Tomcat to load.
       wait_for:
-        timeout: 20
+        msg: "Please Wait"
+        timeout: 7
 
     - name: Load Tomcat URL
       uri:
