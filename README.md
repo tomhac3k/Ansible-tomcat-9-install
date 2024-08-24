@@ -53,4 +53,6 @@ Author Information
 ------------------
 
     Mohammed Tahmeed
-    RHCSA 7, RHCSA 8, RHCE 8
+    #LifeAtRedHat
+    Red Hat Certified Openshift Administration
+    Red Hat Certified Engineer, Specialist in Containers, Services Management and Automation
