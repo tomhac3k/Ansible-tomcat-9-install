@@ -53,4 +53,4 @@ Author Information
 ------------------
 
     Mohammed Tahmeed
-    RHCSA 7, RHCSA 8, RHCE 8
+    Red Hat Certified Specialist in Containers, Services Management and Automation, Openshift Administration
