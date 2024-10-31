@@ -7,9 +7,9 @@ Type=forking
 User=tomcat
 Group=tomcat
 
-Environment=CATALINA_PID={{ tomcat_location }}tomcat9/temp/tomcat.pid
-Environment=CATALINA_HOME={{ tomcat_location }}tomcat9
-Environment=CATALINA_BASE={{ tomcat_location }}tomcat9
+Environment=CATALINA_PID={{ tomcat_location }}tomcat10/temp/tomcat.pid
+Environment=CATALINA_HOME={{ tomcat_location }}tomcat10
+Environment=CATALINA_BASE={{ tomcat_location }}tomcat10
 
 ExecStart={{ tomcat_location }}tomcat10/bin/catalina.sh start
 ExecStop={{ tomcat_location }}tomcat10/bin/catalina.sh stop
